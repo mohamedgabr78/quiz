@@ -7,6 +7,7 @@ const pages = [
                       <button class="option" value="corret" onclick="check(event)">
                         this
                       </button>
+                      /
                       <button class="option" value="incorret" onclick="check(event)">
                         that
                       </button>
@@ -15,70 +16,85 @@ const pages = [
                     <div class="question2">
                     .... an orange back
                       <button class="option" value="corret" onclick="check(event)">
-                        thay are
+                      they're
                       </button>
+                      /
                       <button class="option" value="incorret" onclick="check(event)">
-                        its
+                      It's 
                       </button>
                     </div>
                   </div>`,
   `<div class="container2">
                     <img src="./images/q2.jpg" alt=""></img>
                     <div class="question1">
+                    what are....
                       <button class="option" value="corret" onclick="check(event)">
                         these
                       </button>
+                      /
                       <button class="option" value="incorret" onclick="check(event)">
                         those
                       </button>
+                      ?
                     </div>
                     <div class="question2">
                       <button class="option" value="corret" onclick="check(event)">
-                        its
+                      It's 
                       </button>
+                      /
                       <button class="option" value="incorret" onclick="check(event)">
-                        thay are
+                      they're
                       </button>
+                      green pens
                     </div>
             
                   </div>`,
   `<div class="container3">
                     <img src="./images/q3.jpg" alt=""></img>
                     <div class="question1">
+                    whats...
                       <button class="option" value="corret" onclick="check(event)">
-                        corret
+                        this
                       </button>
+                      /
                       <button class="option" value="incorret" onclick="check(event)">
-                        incorret
+                        that
                       </button>
+                      ?
                     </div>
                     <div class="question2">
                       <button class="option" value="corret" onclick="check(event)">
-                        corret
+                      It's 
                       </button>
+                      /
                       <button class="option" value="incorret" onclick="check(event)">
-                        incorret
+                      they're
                       </button>
+                      a blue calculator
                     </div>
             
                   </div>`,
   `<div class="container4">
                     <img src="./images/q4.png" alt=""></img>
                     <div class="question1">
+                    what are...
                       <button class="option" value="corret" onclick="check(event)">
-                        corret
+                        these
                       </button>
+                      /
                       <button class="option" value="incorret" onclick="check(event)">
-                        incorret
+                        those
                       </button>
+                      ?
                     </div>
                     <div class="question2">
                       <button class="option" value="corret" onclick="check(event)">
-                        corret
+                      It's 
                       </button>
                       <button class="option" value="incorret" onclick="check(event)">
-                        incorret
+                      they're
                       </button>
+                      yellow compasses
                     </div>
             
                   </div>`,
@@ -183,6 +199,34 @@ function showPopUp() {
     document.getElementsByClassName("pop-up")[0].style.display === "none"
       ? "block"
       : "none";
+}
+function reset(e) {
+  let highestContainer = e.target.parentNode;
+  let mainContainer = document.getElementsByClassName("main-container")[0];
+  let page = mainContainer.childNodes[0];
+  let options = page.getElementsByClassName("option");
+  [...options].forEach((option) => {
+    option.classList.remove("optionCorrect", "optionIncorrect", "showWrong");
+    option.disabled = false;
+  });
+  questionState[pageIndex] = {};
+}
+function showAnswer(e) {
+  let highestContainer = e.target.parentNode;
+  let mainContainer = document.getElementsByClassName("main-container")[0];
+  let page = mainContainer.childNodes[0];
+  let options = page.getElementsByClassName("option");
+
+  [...options].forEach((option) => {
+    if (option.value === "corret") {
+      option.classList.add("optionCorrect");
+      option.disabled = true;
+    } else if (option.value === "incorret") {
+      option.classList.add("optionIncorrect");
+      option.disabled = true;
+    }
+  });
+  questionState[pageIndex] = { question1: true, question2: true };
 }
 
 function resetAll() {
