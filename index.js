@@ -184,3 +184,14 @@ function showPopUp() {
       ? "block"
       : "none";
 }
+
+function resetAll() {
+  let options = document.getElementsByClassName("option");
+  [...options].forEach((option) => {
+    option.classList.remove("optionCorrect", "optionIncorrect", "showWrong");
+    option.disabled = false;
+  });
+  questionState = [...Array(pages.length)];
+  pageIndex = 0;
+  handleNav();
+}
