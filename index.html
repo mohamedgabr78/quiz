@@ -7,13 +7,61 @@
     <title>quiz</title>
   </head>
   <body onload="renderPageOnload()">
-    <div class="main-container"></div>
-    <button onclick="resetAll()">reset all</button>
-    <button onclick="reset(event)">reset</button>
-    <button onclick="showAnswer(event)">show answers</button>
-    <button class="prev-btn" onclick="navigatePage('prev')">prev page</button>
-    <button class="next-btn" onclick="navigatePage('next')">nextPage</button>
-    <div class="page-counter"></div>
+    <audio
+      id="incorrect-audio"
+      src="http://educationalrc.org/tasks/2/assets/audio/incorrect.mp3"
+    ></audio>
+    <audio
+      id="correct-audio"
+      src="http://educationalrc.org/tasks/2/assets/audio/correct.mp3"
+    ></audio>
+    <div class="page">
+      <div class="header">
+        <div class="header-title">Circle, choose and write.</div>
+        <div class="pop-btns">
+          <button class="btn-4" onclick="showPopUp(0)">
+            <image src="assets/resourse_icon.png" alt="reset-all-icon"></image>
+          </button>
+          <button class="btn-4" onclick="showPopUp(1)">
+            <image src="assets/help_icon.png" alt="reset-all-icon"></image>
+          </button>
+        </div>
+      </div>
+      <div class="pop-up">
+        <button class="close-btn" onclick="closePopUp(0)">
+          <image src="assets/close_icon.png" alt="reset-all-icon"></image>
+        </button>
+        <image src="assets/dummy.jpg" alt="reset-all-icon"></image>
+      </div>
+      <div class="pop-up">
+        <button class="close-btn" onclick="closePopUp(1)">
+          <image src="assets/close_icon.png" alt="reset-all-icon"></image>
+        </button>
+        Help content is here
+      </div>
+      <div class="main-container"></div>
+      <div class="background"></div>
+      <div class="footer">
+        <button class="btn-1" onclick="resetAll()">
+          <image src="/assets/replay_icon.png" alt="reset-all-icon"></image>
+        </button>
+        <div class="sub-footer">
+          <button class="btn-2" onclick="reset(event)">
+            <image src="/assets/reload_icon.png" alt="reset-all-icon"></image>
+          </button>
+          <button class="btn-3" onclick="showAnswer(event)">
+            <image src="/assets/showAns_icon.png" alt="reset-all-icon"></image>
+          </button>
+          <button class="btn-2 prev-btn" onclick="navigatePage('prev')">
+            <image src="/assets/back_icon.png" alt="reset-all-icon"></image>
+          </button>
+          <div class="page-counter"></div>
+          <button class="btn-2 next-btn" onclick="navigatePage('next')">
+            <image src="/assets/next_icon.png" alt="reset-all-icon"></image>
+          </button>
+        </div>
+      </div>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>

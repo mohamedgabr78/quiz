@@ -2,7 +2,7 @@ let pageIndex = 0;
 const pages = [
   {
     container: "container1",
-    image: "./images/q1.png",
+    image: "/1.png",
     question1: {
       option_1: { label: "this", value: "correct" },
       option_2: { label: "that", value: "incorrect" },
@@ -19,7 +19,7 @@ const pages = [
   },
   {
     container: "container2",
-    image: "./images/q2.png",
+    image: "/2.png",
     question1: {
       option_1: { label: "these", value: "incorrect" },
       option_2: { label: "those", value: "correct" },
@@ -36,7 +36,7 @@ const pages = [
   },
   {
     container: "container3",
-    image: "./images/q3.png",
+    image: "/3.png",
     question1: {
       option_1: { label: "this", value: "incorrect" },
       option_2: { label: "that", value: "correct" },
@@ -53,7 +53,7 @@ const pages = [
   },
   {
     container: "container4",
-    image: "./images/q4.png",
+    image: "/4.png",
     question1: {
       option_1: { label: "these", value: "correct" },
       option_2: { label: "those", value: "incorrect" },
@@ -77,45 +77,45 @@ function renderPage(page) {
 
   container.innerHTML = `<div class="${page.container}">
 
-    <image src="${"./assets" + page.image}" alt="image"></image> 
-    <div class="question1">
-<span> ${page.question1.before}</span>
-<button
-  class="option"
-  value="${page.question1.option_1.value}"
-  onclick="check(event)"
->
-  ${page.question1.option_1.label}
-</button>
-<span> ${page.question1.after}</span>
-<button
-  class="option"
-  value="${page.question1.option_2.value}"
-  onclick="check(event)"
->
-  ${page.question1.option_2.label}
-</button>
-<span> ${page.question1.last}</span>
-</div>
-<div class="question2">
-<button
-  class="option"
-  value="${page.question2.option_1.value}"
-  onclick="check(event)"
->
-  ${page.question2.option_1.label}
-</button>
-<span> ${page.question2.between}</span>
-<button
-  class="option"
-  value="${page.question2.option_2.value}"
-  onclick="check(event)"
->
-  ${page.question2.option_2.label}
-</button>
-<span> ${page.question2.after}</span>
-</div>
-</div>`;
+        <image src="${"./assets" + page.image}" alt="image"></image> 
+        <div class="question1">
+    <span> ${page.question1.before}</span>
+    <button
+      class="option"
+      value="${page.question1.option_1.value}"
+      onclick="check(event)"
+    >
+      ${page.question1.option_1.label}
+    </button>
+    <span> ${page.question1.after}</span>
+    <button
+      class="option"
+      value="${page.question1.option_2.value}"
+      onclick="check(event)"
+    >
+      ${page.question1.option_2.label}
+    </button>
+    <span> ${page.question1.last}</span>
+  </div>
+  <div class="question2">
+    <button
+      class="option"
+      value="${page.question2.option_1.value}"
+      onclick="check(event)"
+    >
+      ${page.question2.option_1.label}
+    </button>
+    <span> ${page.question2.between}</span>
+    <button
+      class="option"
+      value="${page.question2.option_2.value}"
+      onclick="check(event)"
+    >
+      ${page.question2.option_2.label}
+    </button>
+    <span> ${page.question2.after}</span>
+  </div>
+    </div>`;
 }
 function renderPageOnload() {
   document.getElementsByClassName("prev-btn")[0].disabled = true;
@@ -191,16 +191,31 @@ function check(e) {
         option.disabled = true;
       }
     });
+
+    document.getElementById("correct-audio").play();
     questionState[pageIndex] = questionState[pageIndex]
       ? { [questionClassname]: true, ...questionState[pageIndex] }
       : { [questionClassname]: true };
   } else if (e.target.value === "incorrect") {
     [...options].forEach((option) => {
       if (option.value === "incorrect") {
+        document.getElementById("incorrect-audio").play();
         option.classList.add("showWrong");
         setTimeout(() => {
           option.classList.remove("showWrong");
-        }, 3000);
+          setTimeout(() => {
+            option.classList.add("showWrong");
+            setTimeout(() => {
+              option.classList.remove("showWrong");
+              setTimeout(() => {
+                option.classList.add("showWrong");
+                setTimeout(() => {
+                  option.classList.remove("showWrong");
+                }, 150);
+              }, 150);
+            }, 150);
+          }, 150);
+        }, 150);
       }
     });
   }
@@ -245,9 +260,9 @@ function resetAll() {
   handleNav();
 }
 
-function showPopUp() {
-  document.getElementsByClassName("pop-up")[0].style.display =
-    document.getElementsByClassName("pop-up")[0].style.display === "none"
-      ? "block"
-      : "none";
+function showPopUp(index) {
+  document.getElementsByClassName("pop-up")[index].style.display = "block";
+}
+function closePopUp(index) {
+  document.getElementsByClassName("pop-up")[index].style.display = "none";
 }
