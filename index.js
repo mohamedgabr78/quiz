@@ -69,14 +69,10 @@ const pages = [
     },
   },
 ];
-
 let questionState = [...Array(pages.length)];
-
 function renderPage(page) {
-  container = document.getElementsByClassName("main-container")[0];
-
+  let container = document.getElementsByClassName("main-container")[0];
   container.innerHTML = `<div class="${page.container}">
-
         <image src="${"./assets" + page.image}" alt="image"></image> 
         <div class="question1">
     <span> ${page.question1.before}</span>
@@ -124,7 +120,6 @@ function renderPageOnload() {
   } of ${pages.length}`;
   renderPage(pages[pageIndex]);
 }
-
 function handleNav() {
   let prevBtn = document.getElementsByClassName("prev-btn")[0];
   let nextBtn = document.getElementsByClassName("next-btn")[0];
@@ -174,13 +169,14 @@ function navigatePage(state) {
     handleNav();
   }
 }
-
 function check(e) {
   let container = e.target.parentNode.parentNode.className;
   let questionClassname = e.target.parentNode.className;
   container = document.getElementsByClassName(container)[0];
   let question = container.getElementsByClassName(questionClassname)[0];
   let options = question.getElementsByClassName("option");
+  console.log("options", options);
+  console.log("target", e.target);
   if (e.target.value === "correct") {
     [...options].forEach((option) => {
       if (option.value === "correct") {
@@ -191,33 +187,17 @@ function check(e) {
         option.disabled = true;
       }
     });
-
     document.getElementById("correct-audio").play();
     questionState[pageIndex] = questionState[pageIndex]
       ? { [questionClassname]: true, ...questionState[pageIndex] }
       : { [questionClassname]: true };
   } else if (e.target.value === "incorrect") {
-    [...options].forEach((option) => {
-      if (option.value === "incorrect") {
-        document.getElementById("incorrect-audio").play();
-        option.classList.add("showWrong");
-        setTimeout(() => {
-          option.classList.remove("showWrong");
-          setTimeout(() => {
-            option.classList.add("showWrong");
-            setTimeout(() => {
-              option.classList.remove("showWrong");
-              setTimeout(() => {
-                option.classList.add("showWrong");
-                setTimeout(() => {
-                  option.classList.remove("showWrong");
-                }, 150);
-              }, 150);
-            }, 150);
-          }, 150);
-        }, 150);
-      }
-    });
+    let option = e.target;
+    document.getElementById("incorrect-audio").play();
+    option.classList.add("showWrong");
+    setTimeout(() => {
+      option.classList.remove("showWrong");
+    }, 900);
   }
 }
 function reset(e) {
@@ -248,7 +228,6 @@ function showAnswer(e) {
   });
   questionState[pageIndex] = { question1: true, question2: true };
 }
-
 function resetAll() {
   let options = document.getElementsByClassName("option");
   [...options].forEach((option) => {
@@ -259,7 +238,6 @@ function resetAll() {
   pageIndex = 0;
   handleNav();
 }
-
 function showPopUp(index) {
   document.getElementsByClassName("pop-up")[index].style.display = "block";
 }
