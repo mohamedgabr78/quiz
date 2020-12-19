@@ -201,7 +201,6 @@ function check(e) {
   }
 }
 function reset(e) {
-  let highestContainer = e.target.parentNode;
   let mainContainer = document.getElementsByClassName("main-container")[0];
   let page = mainContainer.childNodes[0];
   let options = page.getElementsByClassName("option");
@@ -212,7 +211,6 @@ function reset(e) {
   questionState[pageIndex] = {};
 }
 function showAnswer(e) {
-  let highestContainer = e.target.parentNode;
   let mainContainer = document.getElementsByClassName("main-container")[0];
   let page = mainContainer.childNodes[0];
   let options = page.getElementsByClassName("option");
@@ -229,11 +227,6 @@ function showAnswer(e) {
   questionState[pageIndex] = { question1: true, question2: true };
 }
 function resetAll() {
-  let options = document.getElementsByClassName("option");
-  [...options].forEach((option) => {
-    option.classList.remove("optionCorrect", "optionIncorrect", "showWrong");
-    option.disabled = false;
-  });
   questionState = [...Array(pages.length)];
   pageIndex = 0;
   handleNav();
