@@ -118,7 +118,13 @@ function renderPageOnload() {
   document.getElementsByClassName("page-counter")[0].innerHTML = `${
     pageIndex + 1
   } of ${pages.length}`;
-  renderPage(pages[pageIndex]);
+  document.getElementsByClassName("page")[0].style.display = "none";
+  document.getElementsByClassName("loader")[0].style.display = "flex  ";
+  setTimeout(() => {
+    document.getElementsByClassName("page")[0].style.display = "flex";
+    document.getElementsByClassName("loader")[0].style.display = "none";
+    renderPage(pages[pageIndex]);
+  }, 1500);
 }
 function handleNav() {
   let prevBtn = document.getElementsByClassName("prev-btn")[0];
