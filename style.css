@@ -74,7 +74,6 @@ body {
   margin-top: 10%;
   background-color: white;
   border-radius: 1rem;
-  overflow: hidden;
   background-color: white;
   border: 0.15rem solid #f5821f;
   transition: all 1.5s;
@@ -249,10 +248,7 @@ body {
   width: 57%;
   margin-top: 8%;
 }
-.container1,
-.container2,
-.container3,
-.container4 {
+.main-container div:first-child {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
